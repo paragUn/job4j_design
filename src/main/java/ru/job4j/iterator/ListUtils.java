@@ -12,15 +12,12 @@ public class ListUtils {
         iterator.next();
     }
 
-
     public static <T> void addAfter(List<T> list, int index, T value) {
         Objects.checkIndex(index + 1, list.size());
         ListIterator<T> iterator = list.listIterator(index + 1);
         iterator.add(value);
         iterator.next();
     }
-
-
 
     public static <T> void removeIf(List<T> list, Predicate<T> filter) {
         ListIterator<T> iterator = list.listIterator();

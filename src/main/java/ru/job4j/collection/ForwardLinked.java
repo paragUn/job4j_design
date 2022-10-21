@@ -1,7 +1,6 @@
 package ru.job4j.collection;
 
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 public class ForwardLinked<T> implements Iterable<T> {
@@ -23,20 +22,20 @@ public class ForwardLinked<T> implements Iterable<T> {
     }
 
     public boolean revert() {
-        if (head == null || head.next == null) {
-            return false;
+        boolean rsl = getSize() > 1;
+        if (rsl) {
+            Node<T> previous = null;
+            Node<T> current = head;
+            Node<T> next;
+            while (current != null) {
+                next = current.next;
+                current.next = previous;
+                previous = current;
+                current = next;
+            }
+            head = previous;
         }
-        Node<T> previous = null;
-        Node<T> current = head;
-        Node<T> next;
-        while (current != null) {
-            next = current.next;
-            current.next = previous;
-            previous = current;
-            current = next;
-        }
-        head = previous;
-        return true;
+        return rsl;
     }
 
     public void addFirst(T value) {
@@ -45,16 +44,15 @@ public class ForwardLinked<T> implements Iterable<T> {
     }
 
     public T deleteFirst() {
-        T element;
         if (head == null) {
-            throw new NoSuchElementException();
+            throw new NoSuchElementException("Cant delete first element, head is null.");
         }
-            element = head.value;
-            Node<T> next = head.next;
-            head.value = null;
-            head.next = null;
-            head = next;
-            size--;
+        T element = head.value;
+        Node<T> next = head.next;
+        head.value = null;
+        head.next = null;
+        head = next;
+        size--;
         return element;
     }
 
@@ -75,7 +73,7 @@ public class ForwardLinked<T> implements Iterable<T> {
             @Override
             public T next() {
                 if (!hasNext()) {
-                    throw new NoSuchElementException();
+                    throw new NoSuchElementException("No elements!(iterator)");
                 }
                 T value = node.value;
                 node = node.next;

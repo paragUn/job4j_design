@@ -45,5 +45,6 @@ public class SimpleTreeTest {
         assertThat(tree.add(1, 6)).isFalse();
         assertThat(tree.findBy(8)).isEmpty();
         assertThat(tree.findBy(4)).isPresent();
+        assertThat(tree.add(2, 1)).isFalse();
     }
 }

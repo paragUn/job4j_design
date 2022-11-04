@@ -14,7 +14,6 @@ public class LogFilter {
                         var strSplit = s.split(" ");
                         return "404".equals(strSplit[strSplit.length - 2]);
                     }).collect(Collectors.toList());
-
         } catch (IOException e) {
             e.printStackTrace();
         }

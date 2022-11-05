@@ -5,16 +5,15 @@ public class Analysis {
     public void unavailable(String source, String target) {
         try (BufferedReader in = new BufferedReader(new FileReader(source));
              PrintWriter out = new PrintWriter(new FileOutputStream(target))) {
-            String result = "";
             String reader;
             boolean server = true;
             while ((reader = in.readLine()) != null) {
                 if (server && (reader.startsWith("400") || (reader.startsWith("500")))) {
-                    result = reader.split(" ")[1];
+                    out.append(reader.split(" ")[1]);
                     server = false;
                 }
                 if (!server && (reader.startsWith("200") || (reader.startsWith("300")))) {
-                    out.println(result + ";" + reader.split(" ")[1]);
+                    out.append(";").append(reader.split(" ")[1]).append(System.lineSeparator());
                     server = true;
                 }
             }

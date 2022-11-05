@@ -6,12 +6,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringJoiner;
-import java.util.stream.Collectors;
 
 public class Config {
 
     private final String path;
-    private final Map<String, String> values = new HashMap<String, String>();
+    private final Map<String, String> values = new HashMap<>();
 
     public Config(final String path) {
         this.path = path;
@@ -20,7 +19,7 @@ public class Config {
     public void load() {
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
             read.lines()
-                    .filter(s -> !s.startsWith("# ") && !s.endsWith("=") && !s.startsWith("=") && s.contains("=") && s.length() > 2)
+                    .filter(s -> !s.startsWith("#") && !s.isBlank() && valid(s))
                     .map(s -> s.split("=", 2))
                     .forEach(map -> values.put(map[0], map[1]));
         } catch (IOException e) {
@@ -33,6 +32,13 @@ public class Config {
             throw new IllegalArgumentException("Something wrong");
         }
         return values.get(key);
+    }
+
+    private boolean valid(String s) {
+        if (s.endsWith("=") || s.startsWith("=") || !s.contains("=")) {
+            throw new IllegalArgumentException(String.format("incorrect pair: %s", s));
+        }
+        return true;
     }
 
     @Override

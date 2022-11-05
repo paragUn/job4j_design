@@ -17,21 +17,17 @@ class ConfigTest {
     void whenKeyNameWithoutValueAndPasswordWithValue() {
         String path = "./data/key_without_value.properties";
         Config config = new Config(path);
-        config.load();
-        assertThat(config.value("password")).isEqualTo("password");
-        assertThatThrownBy(() -> config.value("name"))
+        assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Something wrong");
+                .hasMessage("incorrect pair: name=");
     }
     @Test
     void whenIncorrectStartsComment() {
         String path = "./data/value_without_key.properties";
         Config config = new Config(path);
-        config.load();
-        assertThat(config.value("password")).isEqualTo("password");
-        assertThatThrownBy(() -> config.value(""))
+        assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Something wrong");
+                .hasMessage("incorrect pair: =Roman");
     }
 
     @Test
@@ -46,9 +42,8 @@ class ConfigTest {
     void whenOnlyEqual() {
         String path = "./data/only_equal.properties";
         Config config = new Config(path);
-        config.load();
-        assertThatThrownBy(() -> config.value(""))
+        assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Something wrong");
+                .hasMessage("incorrect pair: =");
     }
 }

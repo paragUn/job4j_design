@@ -46,4 +46,12 @@ class ConfigTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("incorrect pair: =");
     }
+
+    @Test
+    void whenLastEqual() {
+        String path = "./data/last_equal.properties";
+        Config config = new Config(path);
+        config.load();
+        assertThat(config.value("name")).isEqualTo("roman=");
+    }
 }

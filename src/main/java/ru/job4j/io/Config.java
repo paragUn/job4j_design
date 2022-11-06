@@ -35,7 +35,7 @@ public class Config {
     }
 
     private boolean valid(String s) {
-        if (s.endsWith("=") || s.startsWith("=") || !s.contains("=")) {
+        if (s.indexOf("=") == s.length() - 1 || s.startsWith("=") || !s.contains("=")) {
             throw new IllegalArgumentException(String.format("incorrect pair: %s", s));
         }
         return true;

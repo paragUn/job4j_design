@@ -11,7 +11,7 @@ import java.util.function.Predicate;
 
 
 public class SearchFiles extends SimpleFileVisitor<Path> {
-    Predicate<Path> condition;
+    private Predicate<Path> condition;
     private List<Path> paths = new ArrayList<>();
 
     public SearchFiles(Predicate<Path> condition) {
@@ -24,7 +24,7 @@ public class SearchFiles extends SimpleFileVisitor<Path> {
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-        if (this.condition.test(file)) {
+        if (condition.test(file)) {
             paths.add(file);
         }
         return FileVisitResult.CONTINUE;

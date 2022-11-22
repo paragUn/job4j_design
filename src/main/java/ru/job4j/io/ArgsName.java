@@ -9,14 +9,21 @@ public class ArgsName {
     private final Map<String, String> values = new HashMap<>();
 
     public String get(String key) {
+        if (values.get(key) == null) {
+            throw new IllegalArgumentException("Not found some argument");
+        }
         return values.get(key);
     }
 
     private void parse(String[] args) {
+        if (args == null || args.length == 0) {
+            throw new IllegalArgumentException("Not found some arguments!");
+        }
         for (String arg: args) {
-                String key = arg.substring(1, arg.indexOf("="));
-                String value = arg.substring(arg.indexOf("=") + 1);
-                values.put(key, value);
+            validate(arg);
+            String key = arg.substring(1, arg.indexOf("="));
+            String value = arg.substring(arg.indexOf("=") + 1);
+            values.put(key, value);
         }
     }
 
@@ -27,6 +34,10 @@ public class ArgsName {
     }
 
     private String validate(String name) {
+        if (name == null) {
+            throw new IllegalArgumentException(
+                    String.format("this name: %s is empty", name));
+        }
         if (name.length() < 3) {
             throw new IllegalArgumentException(
                     String.format("this name: %s is incorrect!", name));

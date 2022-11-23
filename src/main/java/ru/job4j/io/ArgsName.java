@@ -9,16 +9,14 @@ public class ArgsName {
     private final Map<String, String> values = new HashMap<>();
 
     public String get(String key) {
-        if (values.get(key) == null) {
+        String result = values.get(key);
+        if (result == null) {
             throw new IllegalArgumentException("Not found some argument");
         }
-        return values.get(key);
+        return result;
     }
 
     private void parse(String[] args) {
-        if (args == null || args.length == 0) {
-            throw new IllegalArgumentException("Not found some arguments!");
-        }
         for (String arg: args) {
             validate(arg);
             String key = arg.substring(1, arg.indexOf("="));
@@ -28,16 +26,15 @@ public class ArgsName {
     }
 
     public static ArgsName of(String[] args) {
+        if (args.length == 0) {
+            throw new IllegalArgumentException("args is empty");
+        }
         ArgsName names = new ArgsName();
         names.parse(args);
         return names;
     }
 
     private void validate(String name) {
-        if (name == null) {
-            throw new IllegalArgumentException(
-                    String.format("this name: %s is empty", name));
-        }
         if (name.length() < 3) {
             throw new IllegalArgumentException(
                     String.format("this name: %s is incorrect!", name));
@@ -48,11 +45,11 @@ public class ArgsName {
         }
         if (!name.startsWith("-")) {
             throw new IllegalArgumentException(
-                    String.format("this name: %s does not contain a key", name));
+                    String.format("this name: %s does not contain a ", name));
         }
-        if (name.startsWith("-") && name.charAt(1) == '=') {
+        if (name.startsWith("-=")) {
             throw new IllegalArgumentException(
-                    String.format("this name: %s does not contain a value", name));
+                    String.format("this name: %s does not contain a key", name));
         }
         if (name.indexOf("=") == name.length() - 1) {
             throw new IllegalArgumentException(

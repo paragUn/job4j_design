@@ -35,13 +35,23 @@ class ArgsNameTest {
     }
     @Test
     void whenGetNotKey() {
-        ArgsName jvm = ArgsName.of(new String[] {"-=512"});
-        assertThatThrownBy(() -> jvm.get("")).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> ArgsName.of(new String[]{"-=512"}))
+                .isInstanceOf(IllegalArgumentException.class);
     }
     @Test
     void whenGetNotValue() {
-        ArgsName jvm = ArgsName.of(new String[] {"-Xmx="});
-        assertThatThrownBy(() -> jvm.get("Xmx")).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("this name: -Xmx= does not contain a value");
+        assertThatThrownBy(() -> ArgsName.of(new String[]{"-Xmx="}))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void whenGetNoEquals() {
+        assertThatThrownBy(() -> ArgsName.of(new String[]{"-Xmx:512"}))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+    @Test
+    void whenGetNoMinus() {
+        assertThatThrownBy(() -> ArgsName.of(new String[]{"Xmx=512"}))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

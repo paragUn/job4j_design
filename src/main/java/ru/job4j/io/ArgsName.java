@@ -33,7 +33,7 @@ public class ArgsName {
         return names;
     }
 
-    private String validate(String name) {
+    private void validate(String name) {
         if (name == null) {
             throw new IllegalArgumentException(
                     String.format("this name: %s is empty", name));
@@ -50,11 +50,14 @@ public class ArgsName {
             throw new IllegalArgumentException(
                     String.format("this name: %s does not contain a key", name));
         }
+        if (name.startsWith("-") && name.charAt(1) == '=') {
+            throw new IllegalArgumentException(
+                    String.format("this name: %s does not contain a value", name));
+        }
         if (name.indexOf("=") == name.length() - 1) {
             throw new IllegalArgumentException(
                     String.format("this name: %s does not contain a value", name));
         }
-        return name;
     }
 
     public static void main(String[] args) {

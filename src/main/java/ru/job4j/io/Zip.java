@@ -17,7 +17,7 @@ public class Zip {
                     zip.write(out.readAllBytes());
                 }
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -28,24 +28,47 @@ public class Zip {
             try (BufferedInputStream out = new BufferedInputStream(new FileInputStream(source))) {
                 zip.write(out.readAllBytes());
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static void main(String[] args) {
-        Zip zip = new Zip();
-        zip.packSingleFile(
-                new File("./pom.xml"),
-                new File("./pom.zip")
-        );
-        ArgsName argsName = ArgsName.of(args);
-        argsName.get(args[0]);
-        try {
-            zip.packFiles(Search.search(Paths.get(args[0]), p -> p.toFile().getName().endsWith(args[1])), Paths.get(args[2]).toFile());
-        } catch (Exception e) {
-            e.printStackTrace();
+    private static void validate(ArgsName args) {
+        File file = new File(args.get("d"));
+        if (!file.isDirectory()) {
+            throw new IllegalArgumentException(String.format("Проверьте, что путь - это директория, а не файл: %s ", file.getAbsolutePath()));
         }
+        if (!args.get("e").startsWith(".") && args.get("e").length() < 2) {
+            throw new IllegalArgumentException("Аргумент 'e' должен начинаться с точки!");
+        }
+        if (!args.get("o").endsWith(".zip")) {
+            System.out.println(args.get("o"));
+            throw new IllegalArgumentException("Аргумент должен иметь расширение .zip");
+        }
+    }
 
+    public static void main(String[] args) throws IOException {
+        if (args.length != 3) {
+            throw new IllegalArgumentException(
+                    String.format("wrong number of args %s", args.length));
+        }
+        Zip zip = new Zip();
+//        zip.packSingleFile(
+//                new File("./pom.xml"),
+//                new File("./pom.zip")
+//        );
+        ArgsName argsName = ArgsName.of(args);
+//        System.out.println(argsName.get("d"));
+//        System.out.println(argsName.get("e"));
+//        System.out.println(argsName.get("o"));
+        validate(argsName);
+
+//        for (String arg : args) {
+//            System.out.println(arg);
+//        }
+
+            List<Path> listPaths = Search.search(Paths.get(argsName.get("d")),
+                    p -> p.toFile().getName().endsWith(argsName.get("c")));
+            zip.packFiles(listPaths, Paths.get("e").toFile());
     }
 }

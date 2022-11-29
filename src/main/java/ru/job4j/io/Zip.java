@@ -1,7 +1,6 @@
 package ru.job4j.io;
 
 import java.io.*;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -62,6 +61,10 @@ public class Zip {
         List<Path> listPaths = Search.search(Paths.get(argsName.get(directory)),
                 p -> !p.toFile().getName().endsWith(argsName.get(exclude)));
         Zip zip = new Zip();
+        zip.packSingleFile(
+                new File("./pom.xml"),
+                new File("./pom.zip")
+        );
             zip.packFiles(listPaths, new File(argsName.get(output)));
     }
 }

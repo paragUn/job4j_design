@@ -12,6 +12,7 @@ public class ConsoleChat {
     private static final String CONTINUE = "продолжить";
     private final String path;
     private final String botAnswers;
+    private final Random r = new Random();
 
     public ConsoleChat(String path, String botAnswers) {
         this.path = path;
@@ -32,7 +33,6 @@ public class ConsoleChat {
                     result.add(str);
                 }
             }
-            Random r = new Random();
             int resultIndex = r.nextInt(bot.size());
             String answer = bot.get(resultIndex);
             result.add(answer);

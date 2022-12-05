@@ -17,13 +17,13 @@ public class CSVReader {
         saveCSV(changedLine, argsName.get("out"));
     }
 
-    private static List<String> readCSV(String path) throws FileNotFoundException {
-        Scanner scanner = new Scanner(new FileInputStream(path));
-        List<String> res = new ArrayList<>();
-        while (scanner.hasNext()) {
-            res.add(scanner.nextLine());
-        }
-        return res;
+    private static List<String> readCSV(String path) throws Exception {
+            Scanner scanner = new Scanner(new FileInputStream(path));
+            List<String> res = new ArrayList<>();
+            while (scanner.hasNext()) {
+                res.add(scanner.nextLine());
+            }
+            return res;
     }
 
 //-path=file.csv -delimiter=;  -out=stdout -filter=name,age
@@ -31,8 +31,9 @@ public class CSVReader {
 //                "Tom;20;Smith;Bachelor",
 //                "Jack;25;Johnson;Undergraduate",
 //                "William;30;Brown;Secondary special"
-    private static String lineChanger(List<String> readLine, String delimiter, String filter) {
-        StringJoiner str = new StringJoiner(delimiter); // выдача результата
+    private static String lineChanger(List<String> readLine, String delimiter, String filter) throws Exception {
+        // выдача результата
+        var ls = System.lineSeparator();
         List<Integer> intList = new ArrayList<>(); // массив индексов
 
         List<String> keywordFilter = Arrays.asList(filter.split(",")); //массив ключевых слов
@@ -54,15 +55,24 @@ public class CSVReader {
 
 //        readLine.forEach(System.out::println);
 
-//        List<String> splittedReadline =
+        List<String> result = new ArrayList<>();
+
+        StringJoiner joiner;
         for (String current : readLine) {
+            joiner = new StringJoiner(delimiter);
             for (int index : intList) {
                 String[] splittedReadline = current.split(delimiter);
-                str.add(splittedReadline[index]);
+                joiner.add(splittedReadline[index]);
+//              result.add(splittedReadline[index]);
             }
-            str.add(System.lineSeparator());
+            result.add(joiner.toString());
+//        joiner.add(System.lineSeparator());
         }
-        return str.toString();
+//        System.out.println("/=====================/");
+//        result.forEach(System.out::println);
+//        System.out.println("/=====================/");
+
+        return String.join(ls, result);
     }
 
     private static void saveCSV(String outData, String outPath) {

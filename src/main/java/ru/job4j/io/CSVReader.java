@@ -6,21 +6,23 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class CSVReader {
-    public static void handle(ArgsName argsName) throws IOException {
+    public static void handle(ArgsName argsName) {
         checkArgs(argsName);
         List<String> readLines = readCSV(argsName.get("path"));
         String changedLine = lineChanger(readLines, argsName.get("delimiter"), argsName.get("filter"));
         saveCSV(changedLine, argsName.get("out"));
     }
 
-    private static List<String> readCSV(String path) throws FileNotFoundException {
+    private static List<String> readCSV(String path) {
+        List<String> res = new ArrayList<>();
             try (Scanner scanner = new Scanner(new FileReader(path))) {
-                List<String> res = new ArrayList<>();
                 while (scanner.hasNextLine()) {
                     res.add(scanner.nextLine());
                 }
-                return res;
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
             }
+            return res;
     }
 
     private static String lineChanger(List<String> readLine, String delimiter, String filter) {
@@ -43,7 +45,7 @@ public class CSVReader {
     }
 
     private static void saveCSV(String outData, String outPath) {
-        if (outPath.equals("stdout")) {
+        if ("stdout".equals(outPath)) {
             System.out.println(outData);
             return;
         }

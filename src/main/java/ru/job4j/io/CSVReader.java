@@ -14,12 +14,13 @@ public class CSVReader {
     }
 
     private static List<String> readCSV(String path) throws FileNotFoundException {
-            Scanner scanner = new Scanner(new FileReader(path));
-            List<String> res = new ArrayList<>();
-            while (scanner.hasNextLine()) {
-                res.add(scanner.nextLine());
+            try (Scanner scanner = new Scanner(new FileReader(path))) {
+                List<String> res = new ArrayList<>();
+                while (scanner.hasNextLine()) {
+                    res.add(scanner.nextLine());
+                }
+                return res;
             }
-            return res;
     }
 
     private static String lineChanger(List<String> readLine, String delimiter, String filter) {
@@ -63,7 +64,6 @@ public class CSVReader {
         }
     }
     public static void main(String[] args) throws IOException {
-    /* args "-path=source.csv" "-delimiter=;" "-out=stdout" "-filter=name,education,age"*/
         ArgsName argsName = ArgsName.of(args);
         handle(argsName);
     }

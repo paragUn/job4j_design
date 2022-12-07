@@ -16,9 +16,14 @@ public class EchoServer {
                     String str = in.readLine();
                     System.out.println(str);
                     if (str != null && !str.isEmpty()) {
-                        if (str.contains("/?msg=Bye")) {
+                        if (str.contains("/?msg=Hello")) {
+                            str = "Hello";
+                        } else if (str.contains("/?msg=Exit")) {
                             server.close();
+                        } else {
+                            str = "What";
                         }
+                        out.write(str.getBytes());
                     }
                     out.flush();
                 }

@@ -61,12 +61,6 @@ public class SomeClass {
                 new int[] {1, 2, 3, 4}
         );
 
-
-
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("true", someClass.isSomeBoolean());
-        jsonObject.put("10", someClass.getSomeInt());
-        jsonObject.put("someString", someClass.getSomeString());
         JSONObject jsonContact = new JSONObject("{\"phone\":\"+7(900)000-00-00\"}");
         List<Integer> list = new ArrayList<>();
         list.add(1);
@@ -74,14 +68,19 @@ public class SomeClass {
         list.add(3);
         list.add(4);
         JSONArray jsonInts = new JSONArray(list);
-        jsonObject.put("contact", jsonContact);
-        jsonObject.put("someInts", jsonInts);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("someBoolean", someClass.isSomeBoolean());
+        jsonObject.put("someInt", someClass.getSomeInt());
+        jsonObject.put("someString", someClass.getSomeString());
+        jsonObject.put("someContact", jsonContact);
+        jsonObject.put("someIntArray", jsonInts);
 
         /* Выведем результат в консоль */
-        System.out.println(jsonObject.toString());
+        System.out.println(jsonObject);
 
         /* Преобразуем объект person в json-строку */
-        System.out.println(new JSONObject(someClass).toString());
+        System.out.println(new JSONObject(someClass));
 
 
     }

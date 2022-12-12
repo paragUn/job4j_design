@@ -1,9 +1,11 @@
 package ru.job4j.serialization.json;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class SomeClass {
     private final boolean someBoolean;
@@ -18,6 +20,26 @@ public class SomeClass {
         this.someString = someString;
         this.someContact = someContact;
         this.someIntArray = someIntArray;
+    }
+
+    public boolean isSomeBoolean() {
+        return someBoolean;
+    }
+
+    public int getSomeInt() {
+        return someInt;
+    }
+
+    public String getSomeString() {
+        return someString;
+    }
+
+    public Contact getSomeContact() {
+        return someContact;
+    }
+
+    public int[] getSomeIntArray() {
+        return someIntArray;
     }
 
     @Override
@@ -38,19 +60,29 @@ public class SomeClass {
                 new Contact("+7(900)000-00-00"),
                 new int[] {1, 2, 3, 4}
         );
-        final Gson gson = new GsonBuilder().create();
-        System.out.println(gson.toJson(someClass));
-        final String personJson =
-                "{\"someBoolean\":true,"
-                        + "\"someInt\":10,"
-                        + "\"someString\":\"someString\","
-                        + "\"someContact\":"
-                        + "{"
-                        + "\"phone\":\"+7(900)000-00-00\""
-                        + "},"
-                        + "\"someIntArray\":[1,2,3,4]"
-                        + "}";
-        final SomeClass someClassMod = gson.fromJson(personJson, SomeClass.class);
-        System.out.println(someClassMod);
+
+
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("true", someClass.isSomeBoolean());
+        jsonObject.put("10", someClass.getSomeInt());
+        jsonObject.put("someString", someClass.getSomeString());
+        JSONObject jsonContact = new JSONObject("{\"phone\":\"+7(900)000-00-00\"}");
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        JSONArray jsonInts = new JSONArray(list);
+        jsonObject.put("contact", jsonContact);
+        jsonObject.put("someInts", jsonInts);
+
+        /* Выведем результат в консоль */
+        System.out.println(jsonObject.toString());
+
+        /* Преобразуем объект person в json-строку */
+        System.out.println(new JSONObject(someClass).toString());
+
+
     }
 }

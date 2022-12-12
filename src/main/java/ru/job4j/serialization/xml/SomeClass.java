@@ -1,15 +1,22 @@
 package ru.job4j.serialization.xml;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import javax.xml.bind.annotation.*;
 import java.util.Arrays;
 
+@XmlRootElement(name = "someClass")
 public class SomeClass {
-    private final boolean someBoolean;
-    private final int someInt;
-    private final String someString;
-    private final Contact someContact;
-    private final int[] someIntArray;
+    @XmlAttribute
+    private boolean someBoolean;
+    @XmlAttribute
+    private int someInt;
+    @XmlAttribute
+    private String someString;
+    private Contact someContact;
+    @XmlElementWrapper(name = "SomeInts")
+    @XmlElement(name = "someInt")
+    private int[] someIntArray;
+
+    public SomeClass() { }
 
     public SomeClass(boolean someBoolean, int someInt, String someString, Contact someContact, int[] someIntArray) {
         this.someBoolean = someBoolean;
@@ -27,15 +34,5 @@ public class SomeClass {
                 + ", someString='" + someString + '\''
                 + ", someContact=" + someContact
                 + ", someIntArray=" + Arrays.toString(someIntArray) + '}';
-    }
-
-    public static void main(String[] args) {
-        final SomeClass someClass = new SomeClass(
-                true,
-                10,
-                "someString",
-                new Contact("+7(900)000-00-00"),
-                new int[] {1, 2, 3, 4}
-        );
     }
 }

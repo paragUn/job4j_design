@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<someClass someBoolean="true" someInt="10" someString="someString">
+    <contact phone="+7(900)000-00-00"/>
+    <someInts>
+        <someInt>1</someInt>
+        <someInt>2</someInt>
+        <someInt>3</someInt>
+        <someInt>4</someInt>
+    </someInts>
+</someClass>

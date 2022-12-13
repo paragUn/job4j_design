@@ -27,8 +27,8 @@ public class Search {
         if (!Files.exists(Paths.get(args[0])) || !Files.isDirectory(Paths.get(args[0]))) {
             throw new IllegalArgumentException(String.format("Incorrect path %s", args[0]));
         }
-        if (!args[1].startsWith(".")) {
-            throw new IllegalArgumentException("File extension must start with \".");
-        }
+//        if (!args[1].startsWith(".")) {
+//            throw new IllegalArgumentException("File extension must start with \".");
+//        }
     }
 }

@@ -21,6 +21,6 @@ insert into owners (owner_name, number_id) values ('Sidorova', 3);
 insert into owners (owner_name, number_id) values ('Petrenko', 4);
 insert into owners (owner_name, number_id) values ('Ignatenko', 5);
 
-select o.owner_name as Владелец, f.number as Номер 
+select o.owner_name as Р’Р»Р°РґРµР»РµС†, f.number as РќРѕРјРµСЂ
 from
 owners as o join flats as f on o.number_id = f.id;

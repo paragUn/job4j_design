@@ -58,4 +58,16 @@ group by type.name;
 
 select product.name from product
     join type
-        on type.name = 'CЫР' or type.
+        on product.type_id = type.id
+where type.name = 'СЫР' or type.name = 'МОЛОКО';
+
+select type.name, COUNT(product.name) as Количество from product
+    join type
+        on type.id = product.type_id
+group by type.name
+having count(product.name) < 10;
+
+select product.name, type.name as Тип from product
+    join type
+        on type.id = product.type_id;
+

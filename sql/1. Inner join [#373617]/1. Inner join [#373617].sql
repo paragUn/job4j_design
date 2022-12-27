@@ -24,3 +24,11 @@ insert into owners (owner_name, number_id) values ('Ignatenko', 5);
 select o.owner_name as Владелец, f.number as Номер
 from
 owners as o join flats as f on o.number_id = f.id;
+
+select o.owner_name as "Фамилия Владельца", f.number as Номер
+from owners as o join flats as f on o.number_id = f.id
+where f.number  > 100 and f.number <= 300;
+
+select o.owner_name as КТО, f.number as ГДЕ
+from owners as o join flats as f on o.number_id = f.id
+where o.owner_name like '%enko%';

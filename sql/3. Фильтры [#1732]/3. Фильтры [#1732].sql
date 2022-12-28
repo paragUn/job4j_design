@@ -28,6 +28,8 @@ insert into product(name, type_id, expired_date, price)
 insert into product(name, type_id, expired_date, price)
     values ('Молоко 3,5%', 2, '2022-12-25', 95);
 insert into product(name, type_id, expired_date, price)
+    values ('Молоко 3,5%', 2, '2022-12-25', 108);
+insert into product(name, type_id, expired_date, price)
     values ('Молоко топленое', 2, '2022-12-01', 100);
 insert into product(name, type_id, expired_date, price)
     values ('Мороженое пломбир шоколадный', 3, '2022-12-10', 180.11);
@@ -49,7 +51,7 @@ where expired_date <= current_date;
 
 select name, MAX(price) as max_price from product
 group by name, price
-having price = MAX(price);
+where price = MAX(price);
 
 select type.name, COUNT(product.name) as Количество from product
     join type

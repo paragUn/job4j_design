@@ -49,9 +49,8 @@ where name like '%ороженое%';
 select * from product
 where expired_date <= current_date;
 
-select name, MAX(price) as max_price from product
-group by name, price
-where price = MAX(price);
+select product.name, price from product
+where price = (select max(price) from product);
 
 select type.name, COUNT(product.name) as Количество from product
     join type

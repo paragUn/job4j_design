@@ -61,13 +61,15 @@ insert into products (name, producer, count, price) VALUES ('product_3', 'produc
 select * from products;
 
 
-create or replace function before_tax()
+create or replace function data_insert()
     returns trigger as
 $$
     BEGIN
-        update products
-        set price = price + price * 0.2
-        where id = new.id;
+        insert into history_of_price(name, price, date) values(
+        new.name,
+        new.price,
+        CURRENT_TIMESTAMP
+        );
         return NEW;
     END;
 $$

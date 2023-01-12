@@ -61,15 +61,11 @@ insert into products (name, producer, count, price) VALUES ('product_3', 'produc
 select * from products;
 
 
-create or replace function data_insert()
+create or replace function before_tax()
     returns trigger as
 $$
     BEGIN
-        insert into history_of_price(name, price, date) values(
-        new.name,
-        new.price,
-        CURRENT_TIMESTAMP
-        );
+        new.price = new.price + new.price * 0.2;
         return NEW;
     END;
 $$
@@ -81,7 +77,7 @@ create trigger before_tax_trigger
     for each row
     execute procedure before_tax();
 
-insert into products (name, producer, count, price) VALUES ('product_2', 'producer_62', 5, 120);
+insert into products (name, producer, count, price) VALUES ('product_2', 'producer_2', 5, 200);
 select * from products;
 -------------------------------------------
 create table history_of_price (
@@ -97,7 +93,7 @@ create or replace function data_insert()
 $$
     BEGIN
         insert into history_of_price(name, price, date) values(
-        new.name, 
+        new.name,
         new.price,
         CURRENT_TIMESTAMP
         );
@@ -111,11 +107,11 @@ create trigger insert_price_history
     on products
     for each row
     execute procedure data_insert();
-    
+
 insert into products (name, producer, count, price) VALUES ('product_10', 'producer_10', 5, 120);
 insert into products (name, producer, count, price) VALUES ('product_10', 'producer_10', 5, 120);
 insert into products (name, producer, count, price) VALUES ('product_10', 'producer_10', 5, 120);
 insert into products (name, producer, count, price) VALUES ('product_10', 'producer_10', 5, 120);
 
 select * from products;
-select * from history_of_price;         
+select * from history_of_price;

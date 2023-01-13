@@ -27,12 +27,12 @@ create trigger discount_trigger
     execute procedure discount();
 
 
-insert into products (name, producer, count, price) VALUES ('product_3', 'producer_3', 8, 115);
+insert into products (name, producer, count, price) values ('product_3', 'producer_3', 8, 115);
 
 select * from products;
 
 
-insert into products (name, producer, count, price) VALUES ('product_1', 'producer_1', 3, 50);
+insert into products (name, producer, count, price) values ('product_1', 'producer_1', 3, 50);
 
 select * from products;
 
@@ -57,7 +57,7 @@ create trigger after_tax_trigger
     for each statement
     execute procedure after_tax();
 
-insert into products (name, producer, count, price) VALUES ('product_3', 'producer_3', 10, 100);
+insert into products (name, producer, count, price) values ('product_3', 'producer_3', 10, 100);
 select * from products;
 
 
@@ -77,7 +77,7 @@ create trigger before_tax_trigger
     for each row
     execute procedure before_tax();
 
-insert into products (name, producer, count, price) VALUES ('product_2', 'producer_2', 5, 200);
+insert into products (name, producer, count, price) values ('product_2', 'producer_2', 5, 200);
 select * from products;
 -------------------------------------------
 create table history_of_price (
@@ -108,10 +108,13 @@ create trigger insert_price_history
     for each row
     execute procedure data_insert();
 
-insert into products (name, producer, count, price) VALUES ('product_10', 'producer_10', 5, 120);
-insert into products (name, producer, count, price) VALUES ('product_10', 'producer_10', 5, 120);
-insert into products (name, producer, count, price) VALUES ('product_10', 'producer_10', 5, 120);
-insert into products (name, producer, count, price) VALUES ('product_10', 'producer_10', 5, 120);
+insert into products (name, producer, count, price) values ('product_10', 'producer_10', 5, 120);
+insert into products (name, producer, count, price) values ('product_10', 'producer_10', 5, 120);
+insert into products (name, producer, count, price) values ('product_10', 'producer_10', 5, 120);
+insert into products (name, producer, count, price) values ('product_10', 'producer_10', 5, 120);
 
 select * from products;
 select * from history_of_price;
+
+drop trigger after_tax_trigger on products;
+drop trigger before_tax_trigger on products;

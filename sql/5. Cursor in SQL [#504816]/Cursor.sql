@@ -32,30 +32,11 @@ begin transaction;
 
 DECLARE cursor_p cursor for select * from products;
 
-fetch 10 from cursor_p;
+move last from cursor_p;
 
 fetch from cursor_p;
 
-fetch from cursor_p;
-
-move forward 2 from cursor_p;
-
-fetch next from cursor_p;
-
-fetch 5 from cursor_p;
-fetch prior from cursor_p;
-
-move backward 4 from cursor_p;
-
-move backward 1 from cursor_p;
-
-fetch from cursor_p;
-
-move prior from cursor_p;
-fetch from cursor_p;
-fetch from cursor_p;
-
-move backward 3 from cursor_p;
+move backward 6 from cursor_p;
 
 fetch from cursor_p;
 

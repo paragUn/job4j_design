@@ -34,24 +34,24 @@ DECLARE cursor_p cursor for select * from products;
 
 move last from cursor_p;
 
-fetch from cursor_p;
+fetch 0 from cursor_p;
 
-move backward 6 from cursor_p;
+move backward 5 from cursor_p;
 
-fetch from cursor_p;
+fetch 0 from cursor_p;
 
-move backward 9 from cursor_p;
+move backward 8 from cursor_p;
 
-fetch from cursor_p;
+fetch 0 from cursor_p;
 
-move backward 6 from cursor_p;
+move backward 5 from cursor_p;
 
-fetch from cursor_p;
+fetch 0 from cursor_p;
 
-move backward 2 from cursor_products;
+move backward 1 from cursor_p;
 
-fetch from cursor_products;
+fetch 0 from cursor_p;
 
-close cursor_products;
+close cursor_p;
 
 commit;

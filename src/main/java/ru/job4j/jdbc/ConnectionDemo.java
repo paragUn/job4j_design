@@ -8,7 +8,7 @@ import ru.job4j.io.Config;
 
 public class ConnectionDemo {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        Config config = new Config("src/main/resources/log4j.properties");
+        Config config = new Config("src/main/resources/app.properties");
         config.load();
         Class.forName(config.value("driver"));
         try (Connection connection = DriverManager.getConnection(

@@ -26,6 +26,11 @@ public class TableEditor implements AutoCloseable {
         );
     }
 
+//    private void createStatement(String query) {
+//        try(Statement statement = connection.)
+//    }
+
+
     public void createTable(String tableName) throws Exception {
         try (Statement statement = connection.createStatement()) {
             String sql = String.format("create table if not exists %s();", tableName);

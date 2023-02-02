@@ -1,6 +1,8 @@
 package ru.job4j.jdbc;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.*;
 import java.util.Properties;
 import java.util.StringJoiner;
@@ -93,20 +95,22 @@ public class TableEditor implements AutoCloseable {
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        FileInputStream in = new FileInputStream("src/main/resources/app.properties");
-        Properties config = new Properties();
-        config.load(in);
-        TableEditor tableEditor = new TableEditor(config);
-        tableEditor.createTable("products");
-        tableEditor.addColumn("products", "products_name", "varchar(20)");
-        tableEditor.renameColumn("products", "products_name", "p_name");
-        tableEditor.dropColumn("products", "p_name");
-        tableEditor.addColumn("products", "products_name", "varchar(20)");
-        tableEditor.dropTable("products");
-        /*
-        tableEditor.addColumn("products", "products_name", "varchar(20)");
-        */
-        tableEditor.close();
+    public static void main(String[] args) {
+        try (FileInputStream in = new FileInputStream("src/main/resources/app.properties")) {
+            Properties config = new Properties();
+            config.load(in);
+            try (TableEditor tableEditor = new TableEditor(config)) {
+                tableEditor.createTable("products");
+                tableEditor.addColumn("products", "products_name", "varchar(20)");
+                tableEditor.renameColumn("products", "products_name", "p_name");
+                tableEditor.dropColumn("products", "p_name");
+                tableEditor.addColumn("products", "products_name", "varchar(20)");
+                tableEditor.dropTable("products");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

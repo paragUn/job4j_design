@@ -53,26 +53,22 @@ public class ImportDB {
         List<User> users = new ArrayList<>();
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
             rd.lines()
-                    .filter(this::validate)
                     .map(s -> s.split(";"))
-                    .filter(map -> !map[0].isBlank() && !map[1].isBlank() && map[1].contains("@"))
+                    .filter(this::validate)
                     .forEach(map -> users.add(new User(map[0], map[1])));
         }
         return users;
     }
 
-    private boolean validate(String name) {
-        String[] s = name.split(";");
+    private boolean validate(String[] s) {
         if (s.length != 2) {
             throw new IllegalArgumentException("wrong length");
         }
-        if (!name.contains(";")) {
-            throw new IllegalArgumentException(
-                    String.format("this name: %s does not contain the symbol \";\"", name));
+        if (s[0].isBlank() || s[1].isBlank()) {
+            throw new IllegalArgumentException("name or email is blank");
         }
-        if (name.indexOf(";") == name.length() - 1) {
-            throw new IllegalArgumentException(
-                    String.format("this name: %s does not contain a email", name));
+        if (!s[1].contains("@")) {
+            throw new IllegalArgumentException("this email: does not contain the @");
         }
         return true;
     }

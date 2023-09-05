@@ -46,6 +46,11 @@ C:\projects\job4j_design\src\main\java\ru\job4j\iterator\BackwardArrayIt.java
 C:\projects\job4j_design\src\main\java\ru\job4j\iterator\FlatMap.java
 C:\projects\job4j_design\src\main\java\ru\job4j\iterator\ListUtils.java
 C:\projects\job4j_design\src\main\java\ru\job4j\iterator\MatrixIt.java
+C:\projects\job4j_design\src\main\java\ru\job4j\jdbc\City.java
+C:\projects\job4j_design\src\main\java\ru\job4j\jdbc\ConnectionDemo.java
+C:\projects\job4j_design\src\main\java\ru\job4j\jdbc\DebugDemo.java
+C:\projects\job4j_design\src\main\java\ru\job4j\jdbc\StatementDemo.java
+C:\projects\job4j_design\src\main\java\ru\job4j\jdbc\TableEditor.java
 C:\projects\job4j_design\src\main\java\ru\job4j\map\Map.java
 C:\projects\job4j_design\src\main\java\ru\job4j\map\SimpleMap.java
 C:\projects\job4j_design\src\main\java\ru\job4j\map\User.java
@@ -68,6 +73,7 @@ C:\projects\job4j_design\src\main\java\ru\job4j\serialization\xml\Person.java
 C:\projects\job4j_design\src\main\java\ru\job4j\serialization\xml\SomeClass.java
 C:\projects\job4j_design\src\main\java\ru\job4j\set\Set.java
 C:\projects\job4j_design\src\main\java\ru\job4j\set\SimpleSet.java
+C:\projects\job4j_design\src\main\java\ru\job4j\spammer\ImportDB.java
 C:\projects\job4j_design\src\main\java\ru\job4j\tree\SimpleTree.java
 C:\projects\job4j_design\src\main\java\ru\job4j\tree\Tree.java
 C:\projects\job4j_design\src\test\java\ru\job4j\assertj\BoxTest.java
@@ -84,7 +90,6 @@ C:\projects\job4j_design\src\test\java\ru\job4j\io\AbuseTest.java
 C:\projects\job4j_design\src\test\java\ru\job4j\io\AnalysisTest.java
 C:\projects\job4j_design\src\test\java\ru\job4j\io\ArgsNameTest.java
 C:\projects\job4j_design\src\test\java\ru\job4j\io\ConfigTest.java
-C:\projects\job4j_design\src\test\java\ru\job4j\io\CSVReaderTest.java
 C:\projects\job4j_design\src\test\java\ru\job4j\iterator\ArrayItTest.java
 C:\projects\job4j_design\src\test\java\ru\job4j\iterator\BackwardArrayItTest.java
 C:\projects\job4j_design\src\test\java\ru\job4j\iterator\EvenNumbersIterator.java

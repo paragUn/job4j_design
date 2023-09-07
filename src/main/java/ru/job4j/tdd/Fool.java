@@ -7,21 +7,24 @@ public class Fool {
         return div % num == 0;
     }
 
+    public static String getOut(int number) {
+        String out = String.format(
+                "%s%s",
+                div(number, 3) ? "Fizz" : "",
+                div(number, 5) ? "Buzz" : "");
+        out = out.isEmpty() ? Integer.toString(number) : out;
+        return out;
+    }
+
     public static void main(String[] args) {
         System.out.println("Игра FizzBuzz.");
         var startAt = 1;
         var io = new Scanner(System.in);
         while (startAt < 100) {
-            String out = String.format(
-                    "%s%s",
-                    div(startAt, 3) ? "Fizz" : "",
-                    div(startAt, 5) ? "Buzz" : "");
-            if (out.isEmpty()) {
-                out = Integer.toString(startAt);
-            }
-            System.out.println(startAt);
+            System.out.println(getOut(startAt));
+            startAt++;
             var answer = io.nextLine();
-            if (!out.equals(answer)) {
+            if (!answer.equals(getOut(startAt))) {
                 System.out.println("Ошибка. Начинай снова.");
                 startAt = 0;
             }

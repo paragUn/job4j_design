@@ -25,4 +25,25 @@ class FoolTest {
     void whenRemIsNotZeroWithThree() {
         assertThat(Fool.div(10, 3)).isFalse();
     }
+
+    @Test
+    void whenFizz() {
+        assertThat(Fool.getOut(3)).isEqualTo("Fizz");
+    }
+
+    @Test
+    void whenBuzz() {
+        assertThat(Fool.getOut(5)).isEqualTo("Buzz");
+    }
+
+    @Test
+    void whenFizzBuzz() {
+        assertThat(Fool.getOut(15)).isEqualTo("FizzBuzz");
+    }
+
+    @Test
+    void whenNumber() {
+        assertThat(Fool.getOut(17)).isEqualTo("17");
+    }
+
 }

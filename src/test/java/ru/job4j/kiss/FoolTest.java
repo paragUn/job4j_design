@@ -1,4 +1,4 @@
-package ru.job4j.tdd;
+package ru.job4j.kiss;
 
 import org.junit.jupiter.api.Test;
 
